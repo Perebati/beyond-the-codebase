@@ -1,1 +1,2 @@
+- O servidor mySQL demora um pouco para iniciar, geralmente demora uns 5 segundos.
 - $ docker compose up -d
