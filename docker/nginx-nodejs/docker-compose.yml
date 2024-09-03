@@ -9,6 +9,7 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - fullcycle-network
+    restart: unless-stopped
 
   node-app:
     build: ./node-app
@@ -17,6 +18,9 @@ services:
       - /app/node_modules
     networks:
       - fullcycle-network
+    restart: unless-stopped
+    depends_on:
+      - db
 
   nginx:
     image: nginx:alpine
@@ -26,6 +30,7 @@ services:
       - "8080:80"
     networks:
       - fullcycle-network
+    restart: unless-stopped
 
 networks:
   fullcycle-network:
