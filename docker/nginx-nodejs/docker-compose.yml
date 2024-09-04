@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   db:
@@ -6,10 +6,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
+      - ./db/data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - fullcycle-network
-    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
 
   node-app:
     build: ./node-app
@@ -18,9 +24,10 @@ services:
       - /app/node_modules
     networks:
       - fullcycle-network
-    restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    restart: always
 
   nginx:
     image: nginx:alpine
@@ -30,7 +37,10 @@ services:
       - "8080:80"
     networks:
       - fullcycle-network
-    restart: unless-stopped
+    depends_on:
+      node-app:
+        condition: service_started
+    restart: always
 
 networks:
   fullcycle-network:

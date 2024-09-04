@@ -15,11 +15,18 @@ const connection = mysql.createConnection(config);
 
 app.get('/', (req, res) => {
     const sql = `INSERT INTO people(name) VALUES('Full Cycle Rocks!')`;
+
     connection.query(sql, (err, result) => {
-        if (err) throw err;
+        if (err) {
+            console.error('Error inserting data into the database:', err.message);
+            return res.status(500).send('Erro: O banco de dados provavelmente não foi iniciado.');
+        }
 
         connection.query('SELECT name FROM people', (err, rows) => {
-            if (err) throw err;
+            if (err) {
+                console.error('Error fetching data from the database:', err.message);
+                return res.status(500).send('Erro: O banco de dados provavelmente não foi iniciado.');
+            }
 
             let response = '<h1>Full Cycle Rocks!</h1><ul>';
             rows.forEach(row => {
@@ -31,7 +38,6 @@ app.get('/', (req, res) => {
         });
     });
 });
-
 app.listen(port, () => {
     console.log(`App running on port ${port}`);
 });
