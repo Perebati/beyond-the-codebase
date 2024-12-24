@@ -1,11 +1,11 @@
 import { EventDispatcher } from "../../@shared/events/EventDispatcher";
 import Customer from "../entity/customer";
 import Address from "../value-object/address";
-import CustomerAddressChangedEvent from "./customer-address-chenged.event";
+import { CustomerAddressChangedEvent } from "./customer-address-chenged.event";
 import { CustomerCreatedEvent } from "./customer-created.event";
 import SendMessageOneWhenCustomerCreatedHandler from "./handler/send-message-one-when-customer-created.handler";
 import SendMessagetwoWhenCustomerCreatedHandler from "./handler/send-message-two-when-customer-created.handler";
-import SendMessageWhenAddressChangeHandler from "./handler/send-message-when-address-change.handler";
+import { SendMessageWhenAddressChangeHandler } from "./handler/send-message-when-address-change.handler";
 
 describe('domain events tests: customer', () => {
   it('should notify all event handlers when customer is created', () => {
