@@ -8,12 +8,10 @@ export default class ProductFactory {
     type: string,
     name: string,
     price: number
-  ): ProductInterface {
+  ): Product {
     switch (type) {
       case "a":
         return new Product(uuid(), name, price);
-      case "b":
-        return new ProductB(uuid(), name, price);
       default:
         throw new Error("Product type not supported");
     }
