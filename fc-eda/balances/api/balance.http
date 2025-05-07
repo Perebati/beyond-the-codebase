@@ -1,7 +1,17 @@
-GET http://localhost:3003/balances/1
+GET http://localhost:3003/balances/1 HTTP/1.1
 Accept: application/json
 
 ###
 
-GET http://localhost:3003/health
+GET http://localhost:3003/balances/2 HTTP/1.1
+Accept: application/json
+
+###
+
+GET http://localhost:3003/balances/3 HTTP/1.1
+Accept: application/json
+
+###
+
+GET http://localhost:3003/health HTTP/1.1
 Accept: application/json 

@@ -1,16 +1,35 @@
 version: '3'
 
 services:
-  goapp: 
+  wallet-app:
     build: .
+    container_name: wallet
     platform: linux/amd64
     volumes:
-      - .:/app
+      - ./wallet:/app
     ports:
       - 8080:8080
+    depends_on:
+      - wallet-mysql
+      - kafka
+    command: go run cmd/walletcore/main.go
 
-  mysql:
+  balances-app:
+    build: ./balances
+    container_name: balances
+    platform: linux/amd64
+    volumes:
+      - ./balances:/app
+    ports:
+      - 3003:3003
+    depends_on:
+      - balances-mysql
+      - kafka
+    command: sh -c "cd /app && rm -f go.mod go.sum && go mod init github.com/perebati/fc-ms-balances && go get github.com/go-sql-driver/mysql@v1.7.1 gorm.io/driver/mysql gorm.io/gorm github.com/google/uuid github.com/gorilla/mux github.com/confluentinc/confluent-kafka-go/kafka && go run cmd/main.go"
+
+  wallet-mysql:
     image: mysql:5.7
+    container_name: wallet-mysql
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -18,12 +37,22 @@ services:
       MYSQL_PASSWORD: root
     ports:
       - 3306:3306
-    volumes:
-      - .docker/mysql:/var/lib/mysql
+
+  balances-mysql:
+    image: mysql:5.7
+    container_name: balances-mysql
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: balances
+      MYSQL_PASSWORD: root
+    ports:
+      - 3307:3306
 
   zookeeper:
     image: "confluentinc/cp-zookeeper:6.1.0"
     container_name: zookeeper
+    platform: linux/amd64
     ports:
       - 2181:2181
     environment:
@@ -37,9 +66,8 @@ services:
     depends_on:
       - zookeeper
     ports:
-    # Exposes 9092 for external connections to the broker
-    # Use kafka:29092 for connections internal on the docker network
-    # See https://rmoff.net/2018/08/02/kafka-listeners-explained/ for details
+      # Exposes 9092 for external connections to the broker
+      # Use kafka:29092 for connections internal on the docker network
       - '9092:9092'
     environment:
       TZ: Sao_Paulo/Brazil
