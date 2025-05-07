@@ -1,0 +1,7 @@
+GET http://localhost:3003/balances/1
+Accept: application/json
+
+###
+
+GET http://localhost:3003/health
+Accept: application/json 
