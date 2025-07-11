@@ -1,6 +1,5 @@
-# Guia de Aprendizado Full Cycle 3.0
-
-Este repositório serve como um guia centralizado para meu aprendizado seguindo o curso da Full Cycle 3.0. Cada submodule corresponde a um projeto específico que implementa conceitos e desafios de diferentes módulos do curso.
+Este repositório serve como um guia centralizado para meu aprendizado. 
+Cada submodule corresponde a um projeto específico que criei para validar o conhecimento.
 
 ## Projetos e Módulos
 
@@ -38,5 +37,3 @@ Implementação de Clean Architecture com Node.js:
 - Inversão de dependências
 - Casos de uso
 - Testabilidade
-
-> 💡 Este repositório é parte do meu journey de aprendizado no curso Full Cycle 3.0. Cada projeto representa a aplicação prática dos conceitos estudados e foram avaliados para a conclusão de cada módulo pela equipe Full Cycle.
