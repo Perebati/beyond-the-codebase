@@ -1,0 +1,19 @@
+[submodule "fc-docker"]
+	path = fc-docker
+	url = https://github.com/Perebati/fc-docker
+
+[submodule "fc-monolito-nodejs"]
+	path = fc-monolito-nodejs
+	url = https://github.com/Perebati/fc-monolito-nodejs
+
+[submodule "fc-eda-go"]
+	path = fc-eda-go
+	url = https://github.com/Perebati/fc-eda-go
+
+[submodule "fc-ddd-nodejs"]
+	path = fc-ddd-nodejs
+	url = https://github.com/Perebati/fc-ddd-nodejs
+
+[submodule "fc-clean-arch-nodejs"]
+	path = fc-clean-arch-nodejs
+	url = https://github.com/Perebati/fc-clean-arch-nodejs
