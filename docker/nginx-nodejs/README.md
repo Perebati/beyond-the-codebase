@@ -1,7 +1,0 @@
-- $ docker compose up -d
-- Docker compose foi atualizado.
-- Agora o node-app somente será iniciado depois que o banco de dados for iniciado. 
-- A ordem de inicialização de serviços fica da seguinte forma:
-- mySQL --> NodeApp --> nginx
-- Optei por utilizar uma forma nativa do docker de organizar a ordem de inicialização dos conteiners usando o health-check. 
-- Também foi criado um volume para o banco de dados.
